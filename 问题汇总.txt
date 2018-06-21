@@ -16,3 +16,83 @@ String s="abc";  这时可以调用s.charAt(0);等方法,因为String是类，�
 所有的表都有一个主键id，但是这只是语意上的(我们认为的)，为了让数据库把id识别为主键，需要加上主键约束
 
 主键约束自带非空和唯一属性，即不能插入空，也不能重复
+
+数据库三大范式
+
+sql中的问号
+就是传入参数的意思，在相应的位置上放入问号（？）可以代替传入的参数，实现动态查询。多个参数时按顺序匹配
+
+JDBC中prepareStatement 与createStatement 区别
+简单来说，prepareStatement 提供预编译SQL语句，可以用"?" 来替换需要改变的参数值，类似于正则化 SQL查询语句。
+
+createStatement则不提供预编译SQL，需要实时executeQuery（sqlStr） 来访问数据库。 因此，prepareStatement可以多次使用，提高访问数据库的效率。
+
+
+说的简单的话就是
+while(rs.next()) //就是 将rs全部进行读取
+if(rs.next()) //rs进行读取一次 判断是否有数据
+
+“getInt(1);”中的“1”是什么意思？
+sql语句：select id,name,gender,age from admin;
+按照索引获取数据库的数据，从1开始 
+rs.getInt(1);//获取id列的值
+rs.getString(2);//获取name列的值
+//以此类推
+
+ConfigDao 有很多问题
+
+java JDBC 中executeQuery和execute区别
+使用哪一个方法由 SQL 语句所产生的内容决定。
+
+1>方法executeQuery 
+用于产生单个结果集（ResultSet）的语句，例如:被执行最多的SELECT 语句。 
+这个方法被用来执行 SELECT 语句，但也只能执行查询语句，执行后返回代表查询结果的ResultSet对象。
+
+2>方法executeUpdate
+用于执行 INSERT、UPDATE 或 DELETE 语句以及 SQL DDL（数据定义语言）语句，例如 CREATE TABLE 和 DROP TABLE。
+INSERT、UPDATE 或 DELETE 语句的效果是修改表中零行或多行中的一列或多列。
+executeUpdate 的返回值是一个整数（int），指示受影响的行数（即更新计数）。
+对于 CREATE TABLE 或 DROP TABLE 等不操作行的语句，executeUpdate 的返回值总为零
+3>方法execute： 
+    可用于执行任何SQL语句，返回一个boolean值，表明执行该SQL语句是否返回了ResultSet。
+如果执行后第一个结果是ResultSet，则返回true，否则返回false。
+但它执行SQL语句时比较麻烦，通常我们没有必要使用execute方法来执行SQL语句，而是使用executeQuery或executeUpdate更适合。
+但如果在不清楚SQL语句的类型时则只能使用execute方法来执行该SQL语句了。
+
+单例模式？？？？
+
+
+监听器 ====》service=====》DAO====》Database
+						Entity
+
+
+
+java 中list的使用
+List<E>  ([]内的内容可省略)，与数组类似：
+实例化： List[<数据类型>] list = new ArrayList[<数据类型>]();
+获得集合内元素个数：list.size()；
+
+添加元素：
+默认添加 ： list.add(e);
+指定下标添加（添加后下标后的元素向后挪一位）:list.add(index,e);
+删除元素：
+返回是否删除： list.remove(e);
+直接删除制定下标的元素(只删除找到的第一个相符合的元素)
+替换元素（替换掉指定下标的元素）：list.set(index,e);
+取出元素：list.get(index);
+清空集合：list.clear();
+判断集合中是否存在某个元素（存在返回true，不存在返回false）：list.contains(e);
+
+开发一个健身记录软件
+
+实体类是对应到数据库的每一条数据的一个类
+
+
+java review  
+实际上对象就是在继承类中的方法。
+继承实际上是子类继承父类的设定
+类中的状态属性 实例变量 instance variable
+方法
+
+main的两种用途 ： 1 测试真正的类
+				2 启动你的java应用程序
